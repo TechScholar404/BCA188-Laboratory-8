@@ -1,8 +1,7 @@
 <img width="1070" height="872" alt="2fc3b078-6830-4abd-842a-b07b33c3273c" src="https://github.com/user-attachments/assets/97abdf75-0399-43db-9d1d-7567d3e61b80" /> Laboratory Activity 8: Wired Communication
 
 Name:Pansoy, Kate Alexia Pansoy
-Course / Section:BCA188/B186
-Date: _date_
+Course / Section: BCA188/B186
 Board: ESP32 DevKit (WROOM-32)
 I²C module used: _e.g., SSD1306 OLED / BME280 / BMP280_
 Software: Arduino IDE 2.3.10, board "ESP32 Dev Module"
@@ -43,6 +42,10 @@ One I²C module (OLED display or BME280/BMP280 sensor)
 | SPI (VSPI) | CS | 27 | No wire needed |
 
 Pin choices: every signal has its own pin. None are strapping pins (0, 2, 5, 12, 15), onboard flash pins (6 to 11), or input-only pins (34 to 39). A WROOM-32 board is used because WROVER boards reserve GPIO16 and 17 for PSRAM. The default VSPI CS (GPIO5) is a strapping pin, so GPIO27 is used instead.
+
+ Labeled wiring diagram
+ 
+<img width="444" height="471" alt="image" src="https://github.com/user-attachments/assets/1670f86c-5545-4f5d-89a3-d6fc8e3461d3" />
 
  5. Wiring
 
@@ -156,6 +159,7 @@ The Serial Monitor was set to 115200 baud for all other tests.
 
  Test 2: UART without jumper
 
+<img width="1070" height="1109" alt="3f9d452e-eed1-4c14-bb43-126960f695a6 (1)" src="https://github.com/user-attachments/assets/e7d1e5a2-0705-4a11-a8a7-2eb609dd833a" />
 
 <img width="1070" height="1109" alt="3f9d452e-eed1-4c14-bb43-126960f695a6" src="https://github.com/user-attachments/assets/8f36c623-fcc8-48f4-958c-c80fc83ef367" />
 
@@ -186,16 +190,16 @@ Test 8: Sketch at 9600, monitor at 9600
 
 9. Expected vs. observed
 
-| Test | Expected | Observed |
-|---|---|---|
-| UART with jumper | `PING` appears once per second, because TX is wired back to RX | _fill in after running_ |
-| UART without jumper | Nothing is received, because RX is not connected to TX (a few stray characters are possible from the floating pin) | _fill in after running_ |
-| I²C with module | `Found device at 0x3C` for an OLED, or `0x76`/`0x77` for a BME280/BMP280 | _fill in after running_ |
-| I²C without module | `No I2C devices found`, because nothing answers any address | _fill in after running_ |
-| SPI with jumper | `Sent 0xA5, received 0xA5`, because MOSI is wired to MISO | _fill in after running_ |
-| SPI without jumper | A value other than 0xA5, often `0xFF` or `0x00`, because MISO is floating | _fill in after running_ |
-| Sketch at 9600, monitor at 115200 | Garbled or unreadable characters, because the baud rates do not match | Boot messages were readable, but the sketch output appeared as rows of unreadable boxes instead of `UART loopback test` and `PING`, because the baud rates did not match. |
-| Sketch at 9600, monitor at 9600 | Readable text again, because the baud rates match | _fill in after running_ |
+| Interface | Test | Expected | Observed |
+|:---|:---|:---|:---|
+| UART | With jumper | `PING` once per second, because TX is wired back to RX | `PING` printed every ___ second(s) after `UART loopback test`. |
+| UART | Without jumper | Nothing received, apart from possible stray characters from the floating RX pin | After `UART loopback test`, ___ (nothing / stray characters: ___) was printed. |
+| I²C | With module | `Found device at 0x3C` (OLED) or `0x76`/`0x77` (BME/BMP280) | The scan printed `Found device at 0x__` for my ___ module. |
+| I²C | Without module | `No I2C devices found`, because nothing answers any address | The scan printed `No I2C devices found`. |
+| SPI | With jumper | `Sent 0xA5, received 0xA5`, because MOSI is wired to MISO | Printed `Sent 0xA5, received 0x__` every second. |
+| SPI | Without jumper | A value other than 0xA5, often `0xFF` or `0x00`, because MISO floats | Printed `Sent 0xA5, received 0x__`, and the value (stayed the same / changed to ___). |
+| Baud rate | Sketch 9600, monitor 115200 | Garbled or unreadable characters, because the baud rates do not match | Boot messages were readable, but the sketch output appeared as rows of unreadable boxes instead of `UART loopback test` and `PING`, because the baud rates did not match. |
+| Baud rate | Sketch 9600, monitor 9600 | Readable text again, because the baud rates match | After switching the monitor to 9600, the output was ___ (readable `UART loopback test` and `PING`). |
 
  10. Answers to questions
 
