@@ -1,14 +1,19 @@
 Laboratory Activity 8: Wired Communication
 
 Name:Pansoy, Kate Alexia Pansoy
+
 Course / Section: BCA188/B186
+
 Board: ESP32 DevKit (WROOM-32)
+
 I²C module used: _e.g., SSD1306 OLED / BME280 / BMP280_
+
 Software: Arduino IDE 2.3.10, board "ESP32 Dev Module"
 
  1. Objective
 
 Verify the three wired interfaces on the ESP32 board: UART (Serial2), I²C (Wire), and SPI.
+
 
  2. Materials
 
@@ -17,6 +22,7 @@ Verify the three wired interfaces on the ESP32 board: UART (Serial2), I²C (Wire
  Breadboard and jumper wires
 One I²C module (OLED display or BME280/BMP280 sensor)
  Computer with the Arduino IDE
+
 
 3. Repository contents
 
@@ -27,6 +33,7 @@ One I²C module (OLED display or BME280/BMP280 sensor)
 | `spi_loopback/spi_loopback.ino` | Sends 0xA5 once per second and prints the received byte |
 | `images/` | Wiring diagram, photo of the build, and Serial Monitor screenshots |
 | `README.md` | This report |
+
 
  4. Pin table
 
@@ -56,7 +63,9 @@ The I²C module is powered from 3V3. The USB cable was unplugged before every wi
 
 <img width="444" height="471" alt="image" src="https://github.com/user-attachments/assets/1670f86c-5545-4f5d-89a3-d6fc8e3461d3" />
 
+
  6. Sketches
+
 
  Sketch 1: UART loopback (`uart_loopback/uart_loopback.ino`)
 
@@ -81,7 +90,9 @@ void loop() {
   }
 }
 
+
 Sketch 2: I²C scanner (`i2c_scanner/i2c_scanner.ino`)
+
 
 #include <Wire.h>
 
@@ -106,7 +117,9 @@ void setup() {
 
 void loop() {}
 
+
 Sketch 3: SPI loopback (`spi_loopback/spi_loopback.ino`)
+
 
 #include <SPI.h>
 
@@ -135,6 +148,7 @@ void loop() {
   delay(1000);
 }
 
+
  7. Procedure
 
 1. Filled in the pin table and drew the wiring diagram.
@@ -147,40 +161,66 @@ The Serial Monitor was set to 115200 baud for all other tests.
 
  8. Serial Monitor output
 
+
  Test 1: UART with jumper
+
  
 <img width="1069" height="1848" alt="fdd075d9-95cc-4406-a8e3-390220f340a4 (1)" src="https://github.com/user-attachments/assets/50a7903e-04e4-49b7-822c-b8165b664607" />
 
+
  Test 2: UART without jumper
 
-<img width="1070" height="1109" alt="3f9d452e-eed1-4c14-bb43-126960f695a6 (1)" src="https://github.com/user-attachments/assets/e7d1e5a2-0705-4a11-a8a7-2eb609dd833a" />
 
-<img width="1070" height="1109" alt="3f9d452e-eed1-4c14-bb43-126960f695a6" src="https://github.com/user-attachments/assets/8f36c623-fcc8-48f4-958c-c80fc83ef367" />
+<img width="1070" height="1109" alt="3f9d452e-eed1-4c14-bb43-126960f695a6 (1)" src="https://github.com/user-attachments/assets/e7d1e5a2-0705-4a11-a8a7-2eb609dd833a" />
 
 
 Test 3: I²C with module
 
+
+
 <img width="1070" height="1407" alt="a85dc75e-637b-482a-a029-a06660e80bb4" src="https://github.com/user-attachments/assets/3d764d7d-ba24-404b-b72f-6f9f58dc38f9" />
+
+
 
 Test 4: I²C without module
 
+
+
 <img width="1070" height="872" alt="2fc3b078-6830-4abd-842a-b07b33c3273c" src="https://github.com/user-attachments/assets/f5008e3a-8241-401e-99be-4b64e7833382" />
+
+
 
 Test 5: SPI with jumper
 
+
+
 <img width="1070" height="1626" alt="c37fdf5a-f123-4dfd-bbfa-12244faee7dd" src="https://github.com/user-attachments/assets/9e6786fd-ab6f-4b1d-bf92-3d672c9612a3" />
+
+
 
 Test 6: SPI without jumper
 
+
+
 <img width="1070" height="1430" alt="5413a132-eb1c-44ba-aa4a-0ca268a2b4ca" src="https://github.com/user-attachments/assets/6ed1eb80-9275-4d8c-ae95-75d829312c74" />
+
+
  
  Test 7: Sketch at 9600, monitor at 11520
 
+
+
 <img width="1070" height="1107" alt="db8adaf5-4a83-468e-89ac-81be956c4cbc" src="https://github.com/user-attachments/assets/9f79cff3-062f-4da1-934c-51ba07374676" />
+
+
 
 Test 8: Sketch at 9600, monitor at 9600
 
+
+
 <img width="1059" height="1428" alt="60935020-6b51-44b2-a982-9e0da9d5fa15" src="https://github.com/user-attachments/assets/9eed48b0-565a-48c8-82d7-485d4382b7c7" />
+
+
 
 9. Expected vs. observed
 
