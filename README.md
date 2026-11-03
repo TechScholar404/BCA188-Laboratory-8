@@ -2,44 +2,14 @@ Laboratory Activity 8: Wired Communication
 
 
 
-Name:Pansoy, Kate Alexia Pansoy
+Name: Pansoy, Kate Alexia Pansoy
 
 
 Course / Section: BCA188/B186
 
 
- 1. Objective
 
-Verify the three wired interfaces on the ESP32 board: UART (Serial2), I²C (Wire), and SPI.
-
-
-
-
- 2. Materials
-
- ESP32 DevKit (WROOM-32)
- USB data cable
- Breadboard and jumper wires
-One I²C module (OLED display or BME280/BMP280 sensor)
- Computer with the Arduino IDE
-
-
-
-
-3. Repository contents
-
-| Folder / file | Purpose |
-|---|---|
-| `uart_loopback/uart_loopback.ino` | Sends `PING` on Serial2 once per second and prints received bytes |
-| `i2c_scanner/i2c_scanner.ino` | Scans addresses 0x01 to 0x7E once at startup |
-| `spi_loopback/spi_loopback.ino` | Sends 0xA5 once per second and prints the received byte |
-| `images/` | Wiring diagram, photo of the build, and Serial Monitor screenshots |
-| `README.md` | This report |
-
-
-
-
- 4. Pin table
+ 1. Pin table
 
 | Interface | Signal | GPIO used | Connection |
 |---|---|---|---|
@@ -56,7 +26,7 @@ Pin choices: every signal has its own pin. None are strapping pins (0, 2, 5, 12,
 
 
 
- 5. Wiring
+2. Wiring
 
 | Interface | Connection |
 |---|---|
@@ -69,110 +39,7 @@ The I²C module is powered from 3V3. The USB cable was unplugged before every wi
 <img width="444" height="471" alt="image" src="https://github.com/user-attachments/assets/1670f86c-5545-4f5d-89a3-d6fc8e3461d3" />
 
 
-
- 6. Sketches
-
-
-
-
- Sketch 1: UART loopback (`uart_loopback/uart_loopback.ino`)
-
-#define UART_TX 17
-#define UART_RX 16
-
-unsigned long lastSend = 0;
-
-void setup() {
-  Serial.begin(115200);            // USB serial to the Serial Monitor
-  Serial2.begin(9600, SERIAL_8N1, UART_RX, UART_TX);
-  Serial.println("UART loopback test");
-}
-
-void loop() {
-  if (millis() - lastSend >= 1000) {
-    lastSend = millis();
-    Serial2.print("PING\n");
-  }
-  while (Serial2.available()) {
-    Serial.write(Serial2.read());  // print every received byte
-  }
-}
-
-
-
-
-
-Sketch 2: I²C scanner (`i2c_scanner/i2c_scanner.ino`)
-
-
-#include <Wire.h>
-
-#define I2C_SDA 21
-#define I2C_SCL 22
-
-void setup() {
-  Serial.begin(115200);
-  Wire.begin(I2C_SDA, I2C_SCL);
-  delay(500);
-
-  int found = 0;
-  for (uint8_t addr = 0x01; addr <= 0x7E; addr++) {
-    Wire.beginTransmission(addr);
-    if (Wire.endTransmission() == 0) {
-      Serial.printf("Found device at 0x%02X\n", addr);
-      found++;
-    }
-  }
-  if (found == 0) Serial.println("No I2C devices found");
-}
-
-void loop() {}
-
-
-Sketch 3: SPI loopback (`spi_loopback/spi_loopback.ino`)
-
-
-#include <SPI.h>
-
-#define SPI_SCK  18
-#define SPI_MISO 19
-#define SPI_MOSI 23
-#define SPI_CS   27
-
-SPIClass vspi(VSPI);
-
-void setup() {
-  Serial.begin(115200);
-  pinMode(SPI_CS, OUTPUT);
-  digitalWrite(SPI_CS, HIGH);                      // idle high
-  vspi.begin(SPI_SCK, SPI_MISO, SPI_MOSI, SPI_CS);
-}
-
-void loop() {
-  vspi.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0));
-  digitalWrite(SPI_CS, LOW);
-  uint8_t rx = vspi.transfer(0xA5);
-  digitalWrite(SPI_CS, HIGH);
-  vspi.endTransaction();
-
-  Serial.printf("Sent 0xA5, received 0x%02X\n", rx);
-  delay(1000);
-}
-
-
- 7. Procedure
-
-1. Filled in the pin table and drew the wiring diagram.
-2. Uploaded Sketch 1 and ran it with the UART jumper connected, then removed the jumper.
-3. Uploaded Sketch 2 and ran it with the I²C module connected, then with no module.
-4. Uploaded Sketch 3 and ran it with the MOSI to MISO jumper connected, then without it.
-5. Changed `Serial.begin(115200)` in Sketch 1 to `Serial.begin(9600)`, observed the Serial Monitor at 115200 and then at 9600, and restored 115200.
-
-The Serial Monitor was set to 115200 baud for all other tests.
-
-
-
- 8. Serial Monitor output
+3. Serial Monitor output
 
 
  Test 1: UART with jumper
@@ -235,7 +102,7 @@ Test 8: Sketch at 9600, monitor at 9600
 
 
 
-9. Expected vs. observed
+4. Expected vs. observed
 
 | Interface | Test | Expected | Observed |
 |:---|:---|:---|:---|
@@ -250,7 +117,7 @@ Test 8: Sketch at 9600, monitor at 9600
 
  
  
- 10. Answers to questions
+5. Answers to questions
 
 1. Why does UART need both sides to use the same baud rate, while SPI uses a clock line?
    UART has no clock line, so each side times the bits with its own timer and both must agree on the bit duration or the samples land in the wrong places. SPI sends a clock alongside the data, so the receiver samples on the clock edges and needs no pre-agreed rate.
