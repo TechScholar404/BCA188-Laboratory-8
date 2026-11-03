@@ -1,4 +1,4 @@
-<img width="1070" height="872" alt="2fc3b078-6830-4abd-842a-b07b33c3273c" src="https://github.com/user-attachments/assets/97abdf75-0399-43db-9d1d-7567d3e61b80" /> Laboratory Activity 8: Wired Communication
+Laboratory Activity 8: Wired Communication
 
 Name:Pansoy, Kate Alexia Pansoy
 Course / Section: BCA188/B186
@@ -43,9 +43,6 @@ One I²C module (OLED display or BME280/BMP280 sensor)
 
 Pin choices: every signal has its own pin. None are strapping pins (0, 2, 5, 12, 15), onboard flash pins (6 to 11), or input-only pins (34 to 39). A WROOM-32 board is used because WROVER boards reserve GPIO16 and 17 for PSRAM. The default VSPI CS (GPIO5) is a strapping pin, so GPIO27 is used instead.
 
- Labeled wiring diagram
- 
-<img width="444" height="471" alt="image" src="https://github.com/user-attachments/assets/1670f86c-5545-4f5d-89a3-d6fc8e3461d3" />
 
  5. Wiring
 
@@ -57,14 +54,11 @@ Pin choices: every signal has its own pin. None are strapping pins (0, 2, 5, 12,
 
 The I²C module is powered from 3V3. The USB cable was unplugged before every wiring change.
 
-![Wiring diagram](images/wiring.svg)
-
-![Photo of the build](images/build_photo.jpg)
+<img width="444" height="471" alt="image" src="https://github.com/user-attachments/assets/1670f86c-5545-4f5d-89a3-d6fc8e3461d3" />
 
  6. Sketches
 
  Sketch 1: UART loopback (`uart_loopback/uart_loopback.ino`)
-
 
 #define UART_TX 17
 #define UART_RX 16
