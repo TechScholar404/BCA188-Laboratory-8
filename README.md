@@ -1,6 +1,9 @@
 Laboratory Activity 8: Wired Communication
 
+
+
 Name:Pansoy, Kate Alexia Pansoy
+
 
 Course / Section: BCA188/B186
 
@@ -8,6 +11,8 @@ Course / Section: BCA188/B186
  1. Objective
 
 Verify the three wired interfaces on the ESP32 board: UART (Serial2), I²C (Wire), and SPI.
+
+
 
 
  2. Materials
@@ -19,6 +24,8 @@ One I²C module (OLED display or BME280/BMP280 sensor)
  Computer with the Arduino IDE
 
 
+
+
 3. Repository contents
 
 | Folder / file | Purpose |
@@ -28,6 +35,8 @@ One I²C module (OLED display or BME280/BMP280 sensor)
 | `spi_loopback/spi_loopback.ino` | Sends 0xA5 once per second and prints the received byte |
 | `images/` | Wiring diagram, photo of the build, and Serial Monitor screenshots |
 | `README.md` | This report |
+
+
 
 
  4. Pin table
@@ -46,6 +55,7 @@ One I²C module (OLED display or BME280/BMP280 sensor)
 Pin choices: every signal has its own pin. None are strapping pins (0, 2, 5, 12, 15), onboard flash pins (6 to 11), or input-only pins (34 to 39). A WROOM-32 board is used because WROVER boards reserve GPIO16 and 17 for PSRAM. The default VSPI CS (GPIO5) is a strapping pin, so GPIO27 is used instead.
 
 
+
  5. Wiring
 
 | Interface | Connection |
@@ -57,6 +67,7 @@ Pin choices: every signal has its own pin. None are strapping pins (0, 2, 5, 12,
 The I²C module is powered from 3V3. The USB cable was unplugged before every wiring change.
 
 <img width="444" height="471" alt="image" src="https://github.com/user-attachments/assets/1670f86c-5545-4f5d-89a3-d6fc8e3461d3" />
+
 
 
  6. Sketches
@@ -158,6 +169,8 @@ void loop() {
 5. Changed `Serial.begin(115200)` in Sketch 1 to `Serial.begin(9600)`, observed the Serial Monitor at 115200 and then at 9600, and restored 115200.
 
 The Serial Monitor was set to 115200 baud for all other tests.
+
+
 
  8. Serial Monitor output
 
