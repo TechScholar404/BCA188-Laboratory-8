@@ -4,11 +4,6 @@ Name:Pansoy, Kate Alexia Pansoy
 
 Course / Section: BCA188/B186
 
-Board: ESP32 DevKit (WROOM-32)
-
-I²C module used: _e.g., SSD1306 OLED / BME280 / BMP280_
-
-Software: Arduino IDE 2.3.10, board "ESP32 Dev Module"
 
  1. Objective
 
@@ -67,6 +62,8 @@ The I²C module is powered from 3V3. The USB cable was unplugged before every wi
  6. Sketches
 
 
+
+
  Sketch 1: UART loopback (`uart_loopback/uart_loopback.ino`)
 
 #define UART_TX 17
@@ -89,6 +86,9 @@ void loop() {
     Serial.write(Serial2.read());  // print every received byte
   }
 }
+
+
+
 
 
 Sketch 2: I²C scanner (`i2c_scanner/i2c_scanner.ino`)
@@ -235,6 +235,8 @@ Test 8: Sketch at 9600, monitor at 9600
 | Baud rate | Sketch 9600, monitor 115200 | Garbled or unreadable characters, because the baud rates do not match | Boot messages were readable, but the sketch output appeared as rows of unreadable boxes instead of `UART loopback test` and `PING`, because the baud rates did not match. |
 | Baud rate | Sketch 9600, monitor 9600 | Readable text again, because the baud rates match | After switching the monitor to 9600, the output was ___ (readable `UART loopback test` and `PING`). |
 
+ 
+ 
  10. Answers to questions
 
 1. Why does UART need both sides to use the same baud rate, while SPI uses a clock line?
